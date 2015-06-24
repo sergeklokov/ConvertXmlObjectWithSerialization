@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<PhoneBook owner="Serge's phone book">
+  <People>
+    <Person id="1" name="Serge">
+      <Phones>
+        <Phone type="cell">113214324</Phone>
+        <Phone type="home">111114324</Phone>
+      </Phones>
+    </Person>
+    <Person id="2" name="Ruben">
+      <Phones>
+        <Phone>2223432422</Phone>
+        <Phone type="woodden">2223432499</Phone>
+      </Phones>
+    </Person>
+    <Person id="3" name="Barak Obama" active="true">
+      <Phones>
+        <Phone type="satellite">333343233</Phone>
+        <Phone type="cell">333164324</Phone>
+        <Phone type="home">333614327</Phone>
+        <Phone type="don't exist">33761888</Phone>
+      </Phones>
+    </Person>
+    <Person id="4" name="Old Dude With No Phone" active="false"/>
+  </People>
+
+</PhoneBook>
