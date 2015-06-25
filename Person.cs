@@ -15,11 +15,10 @@ namespace ConvertXmlObjectWithSerialization
         [XmlAttribute("name")]
         public string Name { get; set;}
 
-        //[XmlAttribute("active")]
-        //public bool Active { get; set; }  // it's active unless attribute active="false" exists
+        [XmlAttribute("active")]
+        public bool Active { get; set; }  // it's active unless attribute active="false" exists
 
-        //[XmlArray]
-        //[XmlArrayItem(ElementName = "Phone")]
-        //public List<Phone> Phones { get; set; }
+        [XmlElement("Phone")]
+        public List<Phone> Phones { get; set; }
     }
 }

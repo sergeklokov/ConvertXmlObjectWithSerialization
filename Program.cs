@@ -11,9 +11,15 @@ namespace ConvertXmlObjectWithSerialization
     /// <summary>
     /// This is small demo of converting XML -> object and object -> XML with Serialization library
     /// We assume that XML is validated (see my demo of XML validation) and do not have major errors
+    /// 
     /// Serge Klokov 2015
     /// 
     /// Note: XML file have property "Copy to output directory" set to "Copy if newer"
+    /// De-serialization of lists usually works fine with XML like in PhoneBookWide.xml
+    /// But we will go harder way and de-serialize more condensed version from PhoneBook.xml
+    /// Compare these two files and see the difference
+    /// PhoneBookRecreated.xml is final after our pipline:
+    /// xml->de-serialization->object->serialization->xml
     /// </summary>    
     class Program
     {
@@ -61,18 +67,16 @@ namespace ConvertXmlObjectWithSerialization
 
         private static void PrintPhoneBook(PhoneBook phoneBook)
         {
-            //foreach (var person in phoneBook.People)
-            //{
-            //    Console.WriteLine("{0} , active = {1}", person.Name, person.Active);
+            foreach (var person in phoneBook.People)
+            {
+                Console.WriteLine("{0} , active = {1}", person.Name, person.Active);
 
-            //    foreach (var phone in person.Phones)
-            //    {
-            //        Console.Write("    {0}:{1}", phone.Type.ToString(), phone.Number);
-            //    }
+                foreach (var phone in person.Phones)
+                    Console.Write("    {0}:{1}", phone.Type.ToString(), phone.Number);
 
-            //    Console.WriteLine();
-            //    Console.WriteLine();
-            //}
+                Console.WriteLine();
+                Console.WriteLine();
+            }
         }
     }
 }

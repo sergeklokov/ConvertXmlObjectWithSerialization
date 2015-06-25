@@ -1,8 +1,10 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<PhoneBook>
+<?xml version="1.0" encoding="utf-8"?>
+<PhoneBook xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" owner="Serge's phone book">
   <Person id="1" name="Serge" active="false">
-    <Phone type="cell">113214324</Phone>
-    <Phone type="home">111114324</Phone>
+    <Phone type="cell">113214321</Phone>
+    <Phone type="home">111114322</Phone>
+    <Phone type="unknown">112114323</Phone>
+    <Phone type="unknown">111114324</Phone>
   </Person>
   <Person id="2" name="Ruben" active="false">
     <Phone type="unknown">2223432422</Phone>
