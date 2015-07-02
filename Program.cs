@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using System.IO;
+using System.Xml;
 using System.Xml.Serialization;
 
 namespace ConvertXmlObjectWithSerialization
@@ -11,6 +11,8 @@ namespace ConvertXmlObjectWithSerialization
     /// <summary>
     /// This is small demo of converting XML -> object and object -> XML with Serialization library
     /// We assume that XML is validated (see my demo of XML validation) and do not have major errors
+    /// 
+    /// database use type "bytearray", so I added conversion object <--> bytearray
     /// 
     /// Serge Klokov 2015
     /// 
@@ -32,6 +34,10 @@ namespace ConvertXmlObjectWithSerialization
             PrintPhoneBook(phoneBook);
 
             ConvertObjectToXml(phoneBook);
+
+            // ********** object to byte array *********
+            var byteArray = ObjToByteArray(phoneBook);
+            PhoneBook phoneBook2 = ByteArrayToObj(byteArray);
 
             Console.ReadKey();
         }
@@ -62,6 +68,37 @@ namespace ConvertXmlObjectWithSerialization
             {
                 xmlSerializer.Serialize(stringWriter, phoneBook);
                 string s = stringWriter.ToString();
+            }
+        }
+
+        // convert to Byte Array in order to load XML to database
+        public static byte[] ObjToByteArray(PhoneBook phoneBook)
+        {
+            var xmlSerializer = new XmlSerializer(typeof(PhoneBook));
+            var memoryStream = new MemoryStream();
+
+            // XML header have "utf-8"
+            // better use Unicode, so it will be "utf-32"
+            //var xmlTextWriter = new XmlTextWriter(memoryStream, Encoding.UTF32);
+            var xmlTextWriter = new XmlTextWriter(memoryStream, Encoding.UTF8);
+
+            xmlSerializer.Serialize(xmlTextWriter, phoneBook);
+            memoryStream = (MemoryStream)xmlTextWriter.BaseStream;
+
+            return memoryStream.ToArray();
+        }
+
+        public static PhoneBook ByteArrayToObj(byte[] byteArray)
+        {
+            // for debug purpose convert byte array to text (use UTF32 for Unicode)
+            var xmlText = System.Text.Encoding.UTF8.GetString(byteArray);
+
+            // encoding doesn't matter here
+            using (var memoryStream = new MemoryStream(byteArray))
+            {
+                XmlSerializer xmlSerializer = new XmlSerializer(typeof(PhoneBook));
+                PhoneBook phoneBook = (PhoneBook)xmlSerializer.Deserialize(memoryStream);
+                return phoneBook;
             }
         }
 
